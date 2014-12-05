@@ -1,3 +1,4 @@
+// JavaScript Document
 $(document).ready(function() {	
 		$('#searchbox').keyup(function(){
 		var searched = $('#searchbox').val(),
@@ -18,6 +19,21 @@ $(document).ready(function() {
 				element.html(newText);
 			}
 			
+			function compare(text, searched, length)
+			{
+				var a = length;
+				var matching = true;
+				while(a >= 0)
+				{
+					if(text.charAt(a) != searched.charAt(a))
+					{
+						matching = false;
+					}
+					a--;
+				}
+				return matching;
+			}
+			
 			
 		$("<style type='text/css'> .highlight{ background-color:rgba(221,221,221,1) ; font-weight:bold;} </style>").appendTo("head");
 		if(table.length != 0)
@@ -29,7 +45,7 @@ $(document).ready(function() {
 				{
 					$(this).fadeIn('fast');
 				}
-				if($(this).text().charAt(searchedLength) == searched.charAt(searchedLength))
+				if(compare($(this).text(),searched,searchedLength))
 				{
 					addBold($(this), searched);
 				}
@@ -65,7 +81,7 @@ $(document).ready(function() {
 				}
 				
 				
-				if($(this).text().charAt(searchedLength) == searched.charAt(searchedLength))
+				if(compare($(this).text(),searched,searchedLength))
 				{
 					addBold($(this), searched);
 				}
